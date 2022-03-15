@@ -1,7 +1,6 @@
 package com.petCommunity.PetCommunityBack.DomainModels;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import javax.persistence.*;
 
@@ -13,7 +12,6 @@ public class Association {
     @Column(name = "id", nullable = false)
     private Long id;
     private String name;
-    @JsonIgnore
     private String password;
     private String logo;
     private String adress;
