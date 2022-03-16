@@ -150,8 +150,8 @@ class PetControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(toJson(petReqDTO))
                         .accept(MediaType.APPLICATION_JSON))
-                        .andExpect(status().isOk())
-                        .andReturn().getResponse().getContentAsString();
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
 
         assertThat(objectMapper.readValue(sut, expected.getClass()))
                 .usingRecursiveComparison().isEqualTo(expected);

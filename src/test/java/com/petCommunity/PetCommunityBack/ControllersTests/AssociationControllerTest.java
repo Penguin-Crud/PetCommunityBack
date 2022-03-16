@@ -16,6 +16,7 @@ import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -24,6 +25,8 @@ import java.util.List;
 
 
 import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.*;
+import static com.petCommunity.PetCommunityBack.Mappers.PetMapper.mapToPet;
+import static com.petCommunity.PetCommunityBack.Mappers.PetMapper.mapToPetRespDTO;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
 import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
@@ -108,6 +111,38 @@ public class AssociationControllerTest {
 
         when(crudService.save(ArgumentMatchers.any(AssociationReqDTO.class))).thenReturn(expected);
 
+        var sut = mockMvc.perform(post("/associations")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(toJson(associationReqDTO))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
 
+        Assertions.assertThat(objectMapper.readValue(sut, expected.getClass()))
+                .usingRecursiveComparison().isEqualTo(expected);
+
+        assertEquals(toJson(expected),sut,false);
     }
+
+    @Test
+    public void  whenUpdatingAnAssociationReturnPetUpdated() throws Exception {
+        var expected = mapToAssociationRespDTO(mapToAssociation(associationReqDTO));
+
+        when(crudService.save(ArgumentMatchers.any(AssociationReqDTO.class))).thenReturn(expected);
+
+        var sut = mockMvc.perform(post("/associations")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(toJson(associationReqDTO))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        Assertions.assertThat(objectMapper.readValue(sut, expected.getClass()))
+                .usingRecursiveComparison().isEqualTo(expected);
+
+        assertEquals(toJson(expected),sut,false);
+    }
+
+    @Test
+    public void
 }
