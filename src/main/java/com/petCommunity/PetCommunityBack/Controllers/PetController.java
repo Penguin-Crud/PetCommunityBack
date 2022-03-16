@@ -18,7 +18,7 @@ public class PetController {
     private PetCrudService petCrudService;
 
     @GetMapping
-    public List<Pet> getAll(){return petCrudService.getAll();}
+    public List<PetRespDTO> getAll(){return petCrudService.getAll();}
 
     @GetMapping("/{id}")
     public PetRespDTO getById(@PathVariable Long id){
@@ -26,16 +26,17 @@ public class PetController {
     }
 
     @PostMapping
-    public Pet save(@RequestBody PetReqDTO pet){
+    public PetRespDTO save(@RequestBody PetReqDTO pet){
         return petCrudService.save(pet);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id) {
-        petCrudService.deleteId(id); }
+    public String deleteById(@PathVariable Long id) {
+        return petCrudService.deleteId(id);
+    }
 
     @PutMapping
-    public Pet updateByID(@RequestBody PetReqDTO pet){
+    public PetRespDTO updateByID(@RequestBody PetReqDTO pet){
         var updatedAnimal = petCrudService.update(pet);
 
         return updatedAnimal;

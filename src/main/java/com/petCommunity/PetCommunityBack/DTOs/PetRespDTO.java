@@ -1,7 +1,7 @@
 package com.petCommunity.PetCommunityBack.DTOs;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
+
 
 @Getter @Builder
 public class PetRespDTO {
@@ -13,7 +13,7 @@ public class PetRespDTO {
     public String specie;
     public Boolean vaccinated;
     public String description;
-    public AssociationRespDTO association;
+    public AssociationRespDTO associationRespDTO;
 
 
 }

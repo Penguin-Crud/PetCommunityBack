@@ -14,4 +14,5 @@ public class PetReqDTO {
     public String specie;
     public Boolean vaccinated;
     public String description;
+    public AssociationReqDTO associationReqDTO;
 }
