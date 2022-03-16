@@ -7,6 +7,7 @@ import lombok.Getter;
 public class AssociationReqDTO {
     public Long id;
     public String name;
+    public String password;
     public String logo;
     public String adress;
     public Integer capacity;

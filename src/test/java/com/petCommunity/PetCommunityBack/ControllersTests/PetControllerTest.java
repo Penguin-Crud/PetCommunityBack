@@ -41,9 +41,7 @@ class PetControllerTest {
     @MockBean    PetCrudService crudService;
 
     public List<PetRespDTO>pets = new ArrayList<>();
-    public Pet pet;
     public PetReqDTO petReqDTO;
-    public Association authUser;
 
     @BeforeEach
     void init(){
@@ -112,7 +110,7 @@ class PetControllerTest {
     }
 
     @Test
-    public void  getByIdMethodShouldReturnPetDTOasJSON() throws Exception {
+    public void  getByIdMethodShouldReturnPetDTO() throws Exception {
         doReturn(pets.get(5)).when(crudService).getById(5L);
 
         var sut = mockMvc.perform(get("/pets/5"))

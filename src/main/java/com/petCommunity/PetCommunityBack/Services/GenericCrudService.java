@@ -9,5 +9,5 @@ public interface GenericCrudService<T, Pk extends Serializable> {
     T getById(Pk id);
     T update(T t, Pk id);
     List<T> getAll();
-    void deleteId(Pk id);
+    String deleteId(Pk id);
 }

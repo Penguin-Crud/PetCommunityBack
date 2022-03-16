@@ -9,9 +9,9 @@ public class AssociationMapper {
         AssociationRespDTO associationRespDTO = AssociationRespDTO.builder()
                 .id(association.getId())
                 .name(association.getName())
-//                .logo(association.getLogo())
-//                .adress(association.getAdress())
-//                .capacity(association.getCapacity())
+                .logo(association.getLogo())
+                .adress(association.getAdress())
+                .capacity(association.getCapacity())
                 .build();
         return associationRespDTO;
     }
@@ -19,9 +19,9 @@ public class AssociationMapper {
         AssociationReqDTO associationReqDTO = AssociationReqDTO.builder()
                 .id(association.getId())
                 .name(association.getName())
-//                .logo(association.getLogo())
-//                .adress(association.getAdress())
-//                .capacity(association.getCapacity())
+                .logo(association.getLogo())
+                .adress(association.getAdress())
+                .capacity(association.getCapacity())
                 .build();
         return associationReqDTO;
     }
@@ -30,9 +30,9 @@ public class AssociationMapper {
         Association association = Association.builder()
                 .id(associationReqDTO.getId())
                 .name(associationReqDTO.getName())
-//                .logo(associationReqDTO.getLogo())
-//                .adress(associationReqDTO.getAdress())
-//                .capacity(associationReqDTO.getCapacity())
+                .logo(associationReqDTO.getLogo())
+                .adress(associationReqDTO.getAdress())
+                .capacity(associationReqDTO.getCapacity())
                 .build();
         return association;
     }

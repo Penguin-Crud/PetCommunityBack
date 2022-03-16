@@ -12,9 +12,9 @@ public class Association {
     @Column(name = "id", nullable = false)
     private Long id;
     private String name;
-//    private String password;
-//    private String logo;
-//    private String adress;
-//    private Integer capacity;
+    private String password;
+    private String logo;
+    private String adress;
+    private Integer capacity;
 
 }
