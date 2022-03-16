@@ -7,31 +7,28 @@ import com.github.javafaker.Faker;
 import com.petCommunity.PetCommunityBack.Controllers.AssociationController;
 import com.petCommunity.PetCommunityBack.DTOs.AssociationReqDTO;
 import com.petCommunity.PetCommunityBack.DTOs.AssociationRespDTO;
-import com.petCommunity.PetCommunityBack.DTOs.PetReqDTO;
 import com.petCommunity.PetCommunityBack.Services.AssociationCrudServ;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.*;
-import static com.petCommunity.PetCommunityBack.Mappers.PetMapper.mapToPet;
-import static com.petCommunity.PetCommunityBack.Mappers.PetMapper.mapToPetRespDTO;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
 import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 @WebMvcTest(AssociationController.class)
 public class AssociationControllerTest {
@@ -144,5 +141,16 @@ public class AssociationControllerTest {
     }
 
     @Test
-    public void
+    public void whenDeletingAPetReturnConfirmationString() throws Exception {
+        String expected = "Association errased correctly.";
+        when(crudService.deleteId(2L)).thenReturn(expected);
+
+        var sut = mockMvc.perform(delete("/associations/2")
+                        .accept(MediaType.APPLICATION_JSON))
+                        .andDo(print())
+                        .andExpect(status().isOk())
+                        .andReturn().getResponse().getContentAsString();
+
+        org.junit.jupiter.api.Assertions.assertEquals(expected,sut);
+    }
 }

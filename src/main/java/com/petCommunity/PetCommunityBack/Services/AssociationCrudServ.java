@@ -55,6 +55,6 @@ public class AssociationCrudServ {
 
     public String deleteId(Long id) {
         associationRepo.deleteById(id);
-        return associationRepo.existsById(id)?"Error":"Pet errased correctly.";
+        return associationRepo.existsById(id)?"Error":"Association errased correctly.";
     }
 }

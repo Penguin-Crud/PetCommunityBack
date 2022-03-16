@@ -160,10 +160,11 @@ class PetControllerTest {
     @Test
     public void whenDeletingAPetReturnConfirmationString() throws Exception {
         String expected = "Pet errased correctly.";
-        when(crudService.deleteId(petReqDTO.getId())).thenReturn(expected);
+        when(crudService.deleteId(1L)).thenReturn(expected);
 
         var sut = mockMvc.perform(delete("/pets/1")
                 .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
 
