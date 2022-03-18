@@ -1,8 +1,11 @@
 package com.petCommunity.PetCommunityBack.DomainModels;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,9 +23,11 @@ public class Pet {
     private String specie;
     private Boolean vaccinated;
     private String description;
+
     @ManyToOne
     @JoinColumn(name = "association_id")
     private Association association;
+
 
 
 }

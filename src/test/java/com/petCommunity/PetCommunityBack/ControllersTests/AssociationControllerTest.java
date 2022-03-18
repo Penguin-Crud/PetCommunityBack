@@ -8,6 +8,7 @@ import com.petCommunity.PetCommunityBack.Controllers.AssociationController;
 import com.petCommunity.PetCommunityBack.DTOs.AssociationReqDTO;
 import com.petCommunity.PetCommunityBack.DTOs.AssociationRespDTO;
 import com.petCommunity.PetCommunityBack.Services.AssociationCrudServ;
+import com.petCommunity.PetCommunityBack.Services.IAssociationCrudServ;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 import org.mockito.ArgumentMatchers;
@@ -28,16 +29,13 @@ import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.junit.jupiter.api.Assertions.*;
+
 
 @WebMvcTest(AssociationController.class)
 public class AssociationControllerTest {
-    @Autowired
-    MockMvc mockMvc;
-    @Autowired
-    ObjectMapper objectMapper;
-    @MockBean
-    AssociationCrudServ crudService;
+    @Autowired    MockMvc mockMvc;
+    @Autowired    ObjectMapper objectMapper;
+    @MockBean     IAssociationCrudServ crudService;
 
     private final List<AssociationRespDTO> associationsDTOList = new ArrayList<>();
     private AssociationReqDTO associationReqDTO;

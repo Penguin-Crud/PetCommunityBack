@@ -5,6 +5,7 @@ import com.petCommunity.PetCommunityBack.DTOs.AssociationRespDTO;
 import com.petCommunity.PetCommunityBack.DTOs.PetReqDTO;
 import com.petCommunity.PetCommunityBack.DTOs.PetRespDTO;
 import com.petCommunity.PetCommunityBack.Services.AssociationCrudServ;
+import com.petCommunity.PetCommunityBack.Services.IAssociationCrudServ;
 import com.petCommunity.PetCommunityBack.Services.PetCrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ import java.util.List;
 @CrossOrigin
 public class AssociationController {
     @Autowired
-    private AssociationCrudServ associationCrudServ;
+    private IAssociationCrudServ associationCrudServ;
 
     @GetMapping
     public List<AssociationRespDTO> getAll(){return associationCrudServ.getAll();}

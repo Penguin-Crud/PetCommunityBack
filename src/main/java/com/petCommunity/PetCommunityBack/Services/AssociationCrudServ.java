@@ -15,7 +15,7 @@ import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.*;
 
 
 @Service
-public class AssociationCrudServ {
+public class AssociationCrudServ implements IAssociationCrudServ{
 
     @Autowired
     private AssociationRepo associationRepo;

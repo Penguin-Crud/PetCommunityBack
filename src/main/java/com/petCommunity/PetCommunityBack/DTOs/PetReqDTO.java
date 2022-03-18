@@ -1,9 +1,12 @@
 package com.petCommunity.PetCommunityBack.DTOs;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
-@Getter @Builder
+@Getter @Setter
+@Builder
 public class PetReqDTO {
     public Long id;
     public String name;

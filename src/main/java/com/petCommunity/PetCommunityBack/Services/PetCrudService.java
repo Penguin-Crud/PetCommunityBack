@@ -15,15 +15,15 @@ import static com.petCommunity.PetCommunityBack.Mappers.PetMapper.*;
 
 
 @Service
-public class PetCrudService  {
+public class PetCrudService implements IPetCrudService {
 
-    @Autowired
-    private PetRepo petRepo;
+    @Autowired PetRepo petRepo;
+    @Autowired PetImgCrudService petImgCrudService;
 
-
-    public PetRespDTO save(PetReqDTO pet){
+    public PetRespDTO save(PetReqDTO pet, String cloudinaryImgUrl){
         Pet petToSave = mapToPet(pet);
         var dbResp = petRepo.save(petToSave);
+        petImgCrudService.save(dbResp,cloudinaryImgUrl);
         var reqResp = mapToPetRespDTO(dbResp);
         return reqResp;
     }

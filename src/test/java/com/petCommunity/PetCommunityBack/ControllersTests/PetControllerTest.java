@@ -8,6 +8,7 @@ import com.petCommunity.PetCommunityBack.DTOs.PetReqDTO;
 import com.petCommunity.PetCommunityBack.DTOs.PetRespDTO;
 import com.petCommunity.PetCommunityBack.DomainModels.Association;
 import com.petCommunity.PetCommunityBack.DomainModels.Pet;
+import com.petCommunity.PetCommunityBack.Services.IPetCrudService;
 import com.petCommunity.PetCommunityBack.Services.PetCrudService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.*;
@@ -38,7 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class PetControllerTest {
     @Autowired   MockMvc mockMvc;
     @Autowired   ObjectMapper objectMapper;
-    @MockBean    PetCrudService crudService;
+    @MockBean    IPetCrudService crudService;
 
     public List<PetRespDTO>pets = new ArrayList<>();
     public PetReqDTO petReqDTO;
@@ -67,18 +68,6 @@ class PetControllerTest {
                     .build());
         }
 
-        Pet pet = Pet.builder()
-                .id(1L)
-                .hasChip(true)
-                .race(faker.lorem().characters(8,14))
-                .size(faker.dog().size())
-                .age(faker.dog().age())
-                .specie("canino")
-                .vaccinated(faker.random().nextBoolean())
-                .description(faker.dog().memePhrase())
-                .association(authUser)
-                .build();
-
         petReqDTO = PetReqDTO.builder()
                 .id(1L)
                 .hasChip(true)
@@ -88,7 +77,7 @@ class PetControllerTest {
                 .specie("canino")
                 .vaccinated(faker.random().nextBoolean())
                 .description(faker.dog().memePhrase())
-                .associationReqDTO(mapToAssociationReqDTO(authUser))
+                //.associationReqDTO(mapToAssociationReqDTO(authUser))
                 .build();
     };
 
@@ -127,14 +116,14 @@ class PetControllerTest {
     public void whenCreatingANewPetGetObjectCreated() throws Exception {
         var expected = mapToPetRespDTO(mapToPet(petReqDTO));
 
-        when(crudService.save(ArgumentMatchers.any(PetReqDTO.class))).thenReturn(expected);
+        when(crudService.save(ArgumentMatchers.any(PetReqDTO.class),"img.jpg")).thenReturn(expected);
 
         var sut = mockMvc.perform(post("/pets")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(toJson(petReqDTO))
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn().getResponse().getContentAsString();
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(toJson(petReqDTO))
+                        .accept(MediaType.APPLICATION_JSON))
+                        .andExpect(status().isOk())
+                        .andReturn().getResponse().getContentAsString();
 
         assertThat(objectMapper.readValue(sut, expected.getClass()))
                 .usingRecursiveComparison().isEqualTo(expected);
@@ -144,14 +133,14 @@ class PetControllerTest {
     public void whenUpdatingAPetReturnPetUpdated() throws Exception {
         var expected = mapToPetRespDTO(mapToPet(petReqDTO));
 
-        when(crudService.save(ArgumentMatchers.any(PetReqDTO.class))).thenReturn(expected);
+        when(crudService.save(ArgumentMatchers.any(PetReqDTO.class),"img.jpg")).thenReturn(expected);
 
         var sut = mockMvc.perform(post("/pets")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(toJson(petReqDTO))
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn().getResponse().getContentAsString();
+                        .andExpect(status().isOk())
+                        .andReturn().getResponse().getContentAsString();
 
         assertThat(objectMapper.readValue(sut, expected.getClass()))
                 .usingRecursiveComparison().isEqualTo(expected);
@@ -163,10 +152,10 @@ class PetControllerTest {
         when(crudService.deleteId(1L)).thenReturn(expected);
 
         var sut = mockMvc.perform(delete("/pets/1")
-                .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andReturn().getResponse().getContentAsString();
+                        .accept(MediaType.APPLICATION_JSON))
+                        .andDo(print())
+                        .andExpect(status().isOk())
+                        .andReturn().getResponse().getContentAsString();
 
         assertEquals(expected,sut);
     }

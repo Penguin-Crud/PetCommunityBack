@@ -37,4 +37,15 @@ public class AssociationMapper {
         return association;
     }
 
+    public static Association mapToAssociation(AssociationRespDTO associationRespDTO){
+        Association association = Association.builder()
+                .id(associationRespDTO.getId())
+                .name(associationRespDTO.getName())
+                .logo(associationRespDTO.getLogo())
+                .adress(associationRespDTO.getAdress())
+                .capacity(associationRespDTO.getCapacity())
+                .build();
+        return association;
+    }
+
 }
