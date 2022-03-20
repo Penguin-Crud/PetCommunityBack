@@ -25,12 +25,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @CrossOrigin
 public class PetController {
     @Autowired
-    private IPetCrudService petCrudService;
+    IPetCrudService petCrudService;
     @Autowired
-    private ImgsStorageService cloudinaryImpl;
-    @Autowired
-    PetImgCrudService petImgCrudService;
-    @Autowired private AuthUser authUser;
+    ImgsStorageService cloudinaryImpl;
+
+    @Autowired AuthUser authUser;
 
     @GetMapping
     public List<PetRespDTO> getAll(){
