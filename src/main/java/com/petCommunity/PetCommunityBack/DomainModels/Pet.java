@@ -1,12 +1,8 @@
 package com.petCommunity.PetCommunityBack.DomainModels;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Entity
@@ -16,12 +12,14 @@ public class Pet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Boolean hasChip;
+    private Boolean chip;
     private String race;
     private String size;
+    private String gender;
+    private String date;
     private String age;
     private String specie;
-    private Boolean vaccinated;
+    private Boolean vaccines;
     private String description;
 
     @ManyToOne

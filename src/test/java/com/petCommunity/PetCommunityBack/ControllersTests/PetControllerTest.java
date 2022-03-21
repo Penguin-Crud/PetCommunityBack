@@ -6,18 +6,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import com.petCommunity.PetCommunityBack.AuthUser;
 import com.petCommunity.PetCommunityBack.Controllers.PetController;
-import com.petCommunity.PetCommunityBack.DTOs.AssociationRespDTO;
 import com.petCommunity.PetCommunityBack.DTOs.PetReqDTO;
 import com.petCommunity.PetCommunityBack.DTOs.PetRespDTO;
 import com.petCommunity.PetCommunityBack.DomainModels.Association;
-import com.petCommunity.PetCommunityBack.DomainModels.Pet;
 import com.petCommunity.PetCommunityBack.DomainModels.PetImg;
 import com.petCommunity.PetCommunityBack.Services.IPetCrudService;
 import com.petCommunity.PetCommunityBack.Services.ImgsStorageService;
-import com.petCommunity.PetCommunityBack.Services.PetCrudService;
 import com.petCommunity.PetCommunityBack.Services.PetImgCrudService;
-import org.apache.tomcat.jni.FileInfo;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.*;
 import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +20,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +28,6 @@ import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.mapToA
 import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.mapToAssociationRespDTO;
 import static com.petCommunity.PetCommunityBack.Mappers.PetMapper.mapToPet;
 import static com.petCommunity.PetCommunityBack.Mappers.PetMapper.mapToPetRespDTO;
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -79,26 +72,26 @@ class PetControllerTest {
         for (Long i = 0L; i < 10; i++) {
             pets.add(PetRespDTO.builder()
                     .id(i)
-                    .hasChip(true)
+                    .chip(true)
                     .race(faker.lorem().characters(8,14))
                     .size(faker.dog().size())
                     .age(faker.dog().size())
                     .specie("canino")
-                    .vaccinated(faker.random().nextBoolean())
+                    .vaccines(faker.random().nextBoolean())
                     .description(faker.dog().memePhrase())
                     .associationRespDTO(mapToAssociationRespDTO(user))
-                    .petImg(petImgs.subList(0,3))
+                    .imgURL(petImgs.subList(0,3))
                     .build());
         }
 
         petReqDTO = PetReqDTO.builder()
                 .id(1L)
-                .hasChip(true)
+                .chip(true)
                 .race(faker.lorem().characters(8,14))
                 .size(faker.dog().size())
                 .age(faker.dog().age())
                 .specie("canino")
-                .vaccinated(faker.random().nextBoolean())
+                .vaccines(faker.random().nextBoolean())
                 .description(faker.dog().memePhrase())
                 .associationReqDTO(mapToAssociationReqDTO(user))
                 .build();
