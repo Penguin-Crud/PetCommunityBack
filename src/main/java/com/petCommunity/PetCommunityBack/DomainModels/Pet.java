@@ -1,12 +1,8 @@
 package com.petCommunity.PetCommunityBack.DomainModels;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Entity
@@ -25,8 +21,8 @@ public class Pet {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "association_id")
-    private Association association;
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
 

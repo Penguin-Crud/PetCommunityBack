@@ -1,14 +1,14 @@
 package com.petCommunity.PetCommunityBack;
 
-import com.petCommunity.PetCommunityBack.DomainModels.Association;
+import com.petCommunity.PetCommunityBack.DomainModels.User;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component @NoArgsConstructor
 public class AuthUser {
-    public Association user = Association.builder()
+    public User user = User.builder()
             .id(1L)
-            .name("patitas")
+            .username("patitas")
             .adress("street 123")
             .logo("logo.jpg")
             .password("asdfr4321")

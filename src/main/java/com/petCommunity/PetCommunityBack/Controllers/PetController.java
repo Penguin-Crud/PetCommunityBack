@@ -8,8 +8,10 @@ import com.petCommunity.PetCommunityBack.DTOs.PetRespDTO;
 import com.petCommunity.PetCommunityBack.Services.IPetCrudService;
 import com.petCommunity.PetCommunityBack.Services.ImgsStorageService;
 import com.petCommunity.PetCommunityBack.Services.PetImgCrudService;
+import com.petCommunity.PetCommunityBack.auth.facade.IAuthenticationFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,7 +31,8 @@ public class PetController {
     @Autowired
     ImgsStorageService cloudinaryImpl;
 
-    @Autowired AuthUser authUser;
+    @Autowired
+    IAuthenticationFacade authenticationFacade;
 
     @GetMapping
     public List<PetRespDTO> getAll(){
@@ -41,20 +44,24 @@ public class PetController {
         return petCrudService.getById(id);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE} )
     public PetRespDTO save(@RequestPart PetReqDTO pet,@RequestParam MultipartFile image) throws IOException {
+        var user = authenticationFacade.getAuthUser();
         var cloudinaryImgUrl = cloudinaryImpl.saveInCloudinary(image);
-        pet.setAssociationReqDTO(mapToAssociationReqDTO(authUser.user));
+        pet.setAssociationReqDTO(mapToAssociationReqDTO(user));
 
 
         return petCrudService.save(pet, cloudinaryImgUrl);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/{id}")
     public String deleteById(@PathVariable Long id) {
         return petCrudService.deleteId(id);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PutMapping
     public PetRespDTO updateByID(@RequestBody PetReqDTO pet){
         var updatedAnimal = petCrudService.update(pet);

@@ -2,9 +2,9 @@ package com.petCommunity.PetCommunityBack.Services;
 
 import com.petCommunity.PetCommunityBack.DTOs.AssociationReqDTO;
 import com.petCommunity.PetCommunityBack.DTOs.AssociationRespDTO;
-import com.petCommunity.PetCommunityBack.DomainModels.Association;
+import com.petCommunity.PetCommunityBack.DomainModels.User;
 import com.petCommunity.PetCommunityBack.Mappers.AssociationMapper;
-import com.petCommunity.PetCommunityBack.Repositorys.AssociationRepo;
+import com.petCommunity.PetCommunityBack.Repositorys.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,43 +18,43 @@ import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.*;
 public class AssociationCrudServ implements IAssociationCrudServ{
 
     @Autowired
-    private AssociationRepo associationRepo;
+    private UserRepository userRepository;
 
-    public AssociationCrudServ(AssociationRepo assocciationRepo) {
-        this.associationRepo = assocciationRepo;
+    public AssociationCrudServ(UserRepository assocciationRepo) {
+        this.userRepository = assocciationRepo;
     }
 
 
     public AssociationRespDTO save(AssociationReqDTO associationReqDTO) {
-        Association associationToSave = mapToAssociation(associationReqDTO);
-        var dbResp = associationRepo.save(associationToSave);
+        User userToSave = mapToAssociation(associationReqDTO);
+        var dbResp = userRepository.save(userToSave);
         var reqResp = mapToAssociationRespDTO(dbResp);
         return reqResp;
     }
 
 
     public AssociationRespDTO getById(Long id) {
-        return mapToAssociationRespDTO(associationRepo.findById(id).get());
+        return mapToAssociationRespDTO(userRepository.findById(id).get());
     }
 
 
     public AssociationRespDTO update(AssociationReqDTO associationReqDTO) {
-        Association associationToUpdate = mapToAssociation(associationReqDTO);
-        var dbResp = associationRepo.save(associationToUpdate);
+        User userToUpdate = mapToAssociation(associationReqDTO);
+        var dbResp = userRepository.save(userToUpdate);
         var reqResp = mapToAssociationRespDTO(dbResp);
         return reqResp;
     }
 
 
     public List<AssociationRespDTO> getAll() {
-        List<Association> dbAssociations = associationRepo.findAll();
-        return dbAssociations.stream().map(AssociationMapper::mapToAssociationRespDTO)
+        List<User> dbUsers = userRepository.findAll();
+        return dbUsers.stream().map(AssociationMapper::mapToAssociationRespDTO)
                 .collect(Collectors.toList());
     }
 
 
     public String deleteId(Long id) {
-        associationRepo.deleteById(id);
-        return associationRepo.existsById(id)?"Error":"Association errased correctly.";
+        userRepository.deleteById(id);
+        return userRepository.existsById(id)?"Error":"Association errased correctly.";
     }
 }

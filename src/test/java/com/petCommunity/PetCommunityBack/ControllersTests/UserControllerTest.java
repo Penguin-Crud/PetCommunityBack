@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @WebMvcTest(AssociationController.class)
-public class AssociationControllerTest {
+public class UserControllerTest {
     @Autowired    MockMvc mockMvc;
     @Autowired    ObjectMapper objectMapper;
     @MockBean     IAssociationCrudServ crudService;

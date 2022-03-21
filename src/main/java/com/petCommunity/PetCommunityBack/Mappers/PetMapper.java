@@ -33,7 +33,7 @@ public class PetMapper {
                 .specie(pet.getSpecie())
                 .vaccinated(pet.getVaccinated())
                 .description(pet.getDescription())
-                .associationRespDTO(mapToAssociationRespDTO(pet.getAssociation()))
+                .associationRespDTO(mapToAssociationRespDTO(pet.getUser()))
                 .petImg(petImgCrudService.findAllByPet(pet))
                 .build();
         return petRespDTO;
@@ -48,7 +48,7 @@ public class PetMapper {
                 .specie(petDTO.specie)
                 .vaccinated(petDTO.vaccinated)
                 .description(petDTO.description)
-                .association(mapToAssociation(petDTO.associationReqDTO))
+                .user(mapToAssociation(petDTO.associationReqDTO))
                 .build();
         if(petDTO.id!=null){pet.setId(petDTO.id);}
 
@@ -65,7 +65,7 @@ public class PetMapper {
                 .specie(petDTO.specie)
                 .vaccinated(petDTO.vaccinated)
                 .description(petDTO.description)
-                .association(mapToAssociation(petDTO.associationRespDTO))
+                .user(mapToAssociation(petDTO.associationRespDTO))
                 .build();
         if(petDTO.id!=null){pet.setId(petDTO.id);}
 
