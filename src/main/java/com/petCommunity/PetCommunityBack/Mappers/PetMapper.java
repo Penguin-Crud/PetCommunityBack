@@ -4,6 +4,7 @@ import com.petCommunity.PetCommunityBack.DTOs.PetReqDTO;
 import com.petCommunity.PetCommunityBack.DTOs.PetRespDTO;
 import com.petCommunity.PetCommunityBack.DomainModels.Pet;
 import com.petCommunity.PetCommunityBack.Services.PetImgCrudService;
+import com.petCommunity.PetCommunityBack.auth.facade.AuthenticationFacade;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,9 +18,15 @@ public class PetMapper {
 
     private static PetImgCrudService petImgCrudService;
 
+    private static AuthenticationFacade authenticationFacade;
+
     @Autowired
     public void setPetImgCrudService(PetImgCrudService petImgCrudService){
         PetMapper.petImgCrudService=petImgCrudService;
+    }
+    @Autowired
+    public void setAuthenticationFacade(AuthenticationFacade authenticationFacade){
+        PetMapper.authenticationFacade=authenticationFacade;
     }
 
      public static PetRespDTO mapToPetRespDTO(@NotNull Pet pet){
@@ -48,7 +55,7 @@ public class PetMapper {
                 .specie(petDTO.specie)
                 .vaccinated(petDTO.vaccinated)
                 .description(petDTO.description)
-                .user(AssociationMapper.mapToUser(petDTO.userReqDTO))
+                .user(authenticationFacade.getAuthUser())
                 .build();
         if(petDTO.id!=null){pet.setId(petDTO.id);}
 

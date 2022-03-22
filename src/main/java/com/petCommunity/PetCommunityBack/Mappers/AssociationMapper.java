@@ -8,7 +8,7 @@ public class AssociationMapper {
     public static UserRespDTO mapToUserRespDTO(User user){
         UserRespDTO userRespDTO = UserRespDTO.builder()
                 .id(user.getId())
-                .name(user.getUsername())
+                .username(user.getUsername())
                 .logo(user.getLogo())
                 .adress(user.getAdress())
                 .capacity(user.getCapacity())
@@ -18,7 +18,7 @@ public class AssociationMapper {
     public static UserReqDTO mapToUserReqDTO(User user){
         UserReqDTO userReqDTO = UserReqDTO.builder()
                 .id(user.getId())
-                .name(user.getUsername())
+                .username(user.getUsername())
                 .logo(user.getLogo())
                 .adress(user.getAdress())
                 .capacity(user.getCapacity())
@@ -29,7 +29,7 @@ public class AssociationMapper {
     public static User mapToUser(UserReqDTO userReqDTO){
         User user = User.builder()
                 .id(userReqDTO.getId())
-                .username(userReqDTO.getName())
+                .username(userReqDTO.getUsername())
                 .logo(userReqDTO.getLogo())
                 .adress(userReqDTO.getAdress())
                 .capacity(userReqDTO.getCapacity())
@@ -40,7 +40,7 @@ public class AssociationMapper {
     public static User mapToUser(UserRespDTO userRespDTO){
         User user = User.builder()
                 .id(userRespDTO.getId())
-                .username(userRespDTO.getName())
+                .username(userRespDTO.getUsername())
                 .logo(userRespDTO.getLogo())
                 .adress(userRespDTO.getAdress())
                 .capacity(userRespDTO.getCapacity())

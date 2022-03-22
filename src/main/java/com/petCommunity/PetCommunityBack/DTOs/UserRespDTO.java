@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter @Builder
 public class UserRespDTO {
     public Long id;
-    public String name;
+    public String username;
     public String logo;
     public String adress;
     public Integer capacity;

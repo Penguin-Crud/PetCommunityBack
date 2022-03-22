@@ -46,7 +46,7 @@ public class UserControllerTest {
         for (Long i = 0L; i < 5 ; i++) {
             associationsDTOList.add(UserRespDTO.builder()
                     .id(i)
-                    .name(faker.funnyName().name())
+                    .username(faker.funnyName().name())
                     .logo(faker.avatar().image())
                     .adress(faker.address().cityName())
                     .capacity(faker.number().numberBetween(30,50))
@@ -55,7 +55,7 @@ public class UserControllerTest {
         }
 
         userReqDTO = UserReqDTO.builder()
-                .name(faker.funnyName().name())
+                .username(faker.funnyName().name())
                 .password(faker.random().hex(8))
                 .logo(faker.avatar().image())
                 .adress(faker.address().cityName())

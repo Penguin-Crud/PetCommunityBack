@@ -44,8 +44,9 @@ public class PetCrudService implements IPetCrudService {
 
     public PetRespDTO update(PetReqDTO pet) {
         Pet petToUpdate = mapToPet(pet);
-        var dbResp = petRepo.save(petToUpdate);
-        var reqResp = mapToPetRespDTO(dbResp);
+        var dbResp = petRepo.existsById(petToUpdate.getId());
+        var petResp = dbResp?petRepo.save(petToUpdate):null;
+        var reqResp = mapToPetRespDTO(petResp);
         return reqResp;
     }
 
