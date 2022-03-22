@@ -3,12 +3,14 @@ package com.petCommunity.PetCommunityBack.Services;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-@Service
+@Service @NoArgsConstructor @Setter
 public class ImgsStorageService {
     private final Cloudinary imgStorage = new Cloudinary(ObjectUtils.asMap(
             "cloud_name", "petimgstrg",

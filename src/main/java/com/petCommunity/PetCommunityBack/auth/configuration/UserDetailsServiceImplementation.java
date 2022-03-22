@@ -5,6 +5,9 @@ package com.petCommunity.PetCommunityBack.auth.configuration;
 
 import com.petCommunity.PetCommunityBack.DomainModels.User;
 import com.petCommunity.PetCommunityBack.Repositorys.UserRepository;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,15 +15,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Service @NoArgsConstructor @Setter @Getter
 public class UserDetailsServiceImplementation implements UserDetailsService {
 
-    UserRepository userRepository;
-
     @Autowired
-    public UserDetailsServiceImplementation(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private UserRepository userRepository;
+
+
 
     @Override
     @Transactional

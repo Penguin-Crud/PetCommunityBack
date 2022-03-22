@@ -29,10 +29,16 @@ public class PetCrudService implements IPetCrudService {
     }
 
 
-    public PetRespDTO getById(Long id) {
+    public PetRespDTO getPetRespById(Long id) {
         var dbPet = petRepo.findById(id);
         var petToMap = dbPet.get();
         return mapToPetRespDTO(petToMap);
+    }
+
+    public Pet getPetById(Long id) {
+        var dbPet = petRepo.findById(id).get();
+
+        return dbPet;
     }
 
 
@@ -52,7 +58,9 @@ public class PetCrudService implements IPetCrudService {
 
 
     public String deleteId(Long id) {
+
         petRepo.deleteById(id);
+
         return petRepo.existsById(id)?"Error":"Pet errased correctly.";
     }
 }

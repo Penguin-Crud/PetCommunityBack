@@ -30,6 +30,13 @@ public class PetImgCrudService {
         return petImgRepo.findAllByPet(pet);
     }
 
+    public String deleteAllImgsByPet(Pet pet){
+        var imgsToDelete = findAllByPet(pet);
+        petImgRepo.deleteAll(imgsToDelete);
+        var petImgs = findAllByPet(pet);
+        return petImgs.isEmpty()?"Pet Images deleted correctly":"Error";
+    }
+
     public String deleteId(Long id) {
         petImgRepo.deleteById(id);
         return petImgRepo.existsById(id)?"Error":"Image errased correctly.";
