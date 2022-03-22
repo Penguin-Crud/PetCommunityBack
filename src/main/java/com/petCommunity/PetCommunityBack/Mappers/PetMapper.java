@@ -8,8 +8,8 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.mapToAssociation;
-import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.mapToAssociationRespDTO;
+import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.mapToUser;
+import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.mapToUserRespDTO;
 
 
 @Component
@@ -33,7 +33,7 @@ public class PetMapper {
                 .specie(pet.getSpecie())
                 .vaccinated(pet.getVaccinated())
                 .description(pet.getDescription())
-                .associationRespDTO(mapToAssociationRespDTO(pet.getUser()))
+                .userRespDTO(mapToUserRespDTO(pet.getUser()))
                 .petImg(petImgCrudService.findAllByPet(pet))
                 .build();
         return petRespDTO;
@@ -48,7 +48,7 @@ public class PetMapper {
                 .specie(petDTO.specie)
                 .vaccinated(petDTO.vaccinated)
                 .description(petDTO.description)
-                .user(mapToAssociation(petDTO.associationReqDTO))
+                .user(AssociationMapper.mapToUser(petDTO.userReqDTO))
                 .build();
         if(petDTO.id!=null){pet.setId(petDTO.id);}
 
@@ -65,7 +65,7 @@ public class PetMapper {
                 .specie(petDTO.specie)
                 .vaccinated(petDTO.vaccinated)
                 .description(petDTO.description)
-                .user(mapToAssociation(petDTO.associationRespDTO))
+                .user(mapToUser(petDTO.userRespDTO))
                 .build();
         if(petDTO.id!=null){pet.setId(petDTO.id);}
 

@@ -10,26 +10,19 @@ import com.petCommunity.PetCommunityBack.DTOs.PetRespDTO;
 import com.petCommunity.PetCommunityBack.DomainModels.User;
 import com.petCommunity.PetCommunityBack.DomainModels.PetImg;
 import com.petCommunity.PetCommunityBack.Services.IPetCrudService;
-import com.petCommunity.PetCommunityBack.Services.ImgsStorageService;
-import com.petCommunity.PetCommunityBack.Services.PetImgCrudService;
-import com.petCommunity.PetCommunityBack.auth.facade.IAuthenticationFacade;
 import org.junit.jupiter.api.*;
-import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.mapToAssociationReqDTO;
-import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.mapToAssociationRespDTO;
+import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.mapToUserReqDTO;
+import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.mapToUserRespDTO;
 import static com.petCommunity.PetCommunityBack.Mappers.PetMapper.mapToPet;
-import static com.petCommunity.PetCommunityBack.Mappers.PetMapper.mapToPetRespDTO;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
@@ -80,7 +73,7 @@ class PetControllerTest {
                     .specie("canino")
                     .vaccinated(faker.random().nextBoolean())
                     .description(faker.dog().memePhrase())
-                    .associationRespDTO(mapToAssociationRespDTO(user))
+                    .userRespDTO(mapToUserRespDTO(user))
                     .petImg(petImgs.subList(0,3))
                     .build());
         }
@@ -94,7 +87,7 @@ class PetControllerTest {
                 .specie("canino")
                 .vaccinated(faker.random().nextBoolean())
                 .description(faker.dog().memePhrase())
-                .associationReqDTO(mapToAssociationReqDTO(user))
+                .userReqDTO(mapToUserReqDTO(user))
                 .build();
     };
 

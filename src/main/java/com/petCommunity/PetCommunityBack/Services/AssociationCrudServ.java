@@ -1,7 +1,7 @@
 package com.petCommunity.PetCommunityBack.Services;
 
-import com.petCommunity.PetCommunityBack.DTOs.AssociationReqDTO;
-import com.petCommunity.PetCommunityBack.DTOs.AssociationRespDTO;
+import com.petCommunity.PetCommunityBack.DTOs.UserReqDTO;
+import com.petCommunity.PetCommunityBack.DTOs.UserRespDTO;
 import com.petCommunity.PetCommunityBack.DomainModels.User;
 import com.petCommunity.PetCommunityBack.Mappers.AssociationMapper;
 import com.petCommunity.PetCommunityBack.Repositorys.UserRepository;
@@ -25,30 +25,30 @@ public class AssociationCrudServ implements IAssociationCrudServ{
     }
 
 
-    public AssociationRespDTO save(AssociationReqDTO associationReqDTO) {
-        User userToSave = mapToAssociation(associationReqDTO);
+    public UserRespDTO save(UserReqDTO userReqDTO) {
+        User userToSave = mapToUser(userReqDTO);
         var dbResp = userRepository.save(userToSave);
-        var reqResp = mapToAssociationRespDTO(dbResp);
+        var reqResp = mapToUserRespDTO(dbResp);
         return reqResp;
     }
 
 
-    public AssociationRespDTO getById(Long id) {
-        return mapToAssociationRespDTO(userRepository.findById(id).get());
+    public UserRespDTO getById(Long id) {
+        return mapToUserRespDTO(userRepository.findById(id).get());
     }
 
 
-    public AssociationRespDTO update(AssociationReqDTO associationReqDTO) {
-        User userToUpdate = mapToAssociation(associationReqDTO);
+    public UserRespDTO update(UserReqDTO userReqDTO) {
+        User userToUpdate = mapToUser(userReqDTO);
         var dbResp = userRepository.save(userToUpdate);
-        var reqResp = mapToAssociationRespDTO(dbResp);
+        var reqResp = mapToUserRespDTO(dbResp);
         return reqResp;
     }
 
 
-    public List<AssociationRespDTO> getAll() {
+    public List<UserRespDTO> getAll() {
         List<User> dbUsers = userRepository.findAll();
-        return dbUsers.stream().map(AssociationMapper::mapToAssociationRespDTO)
+        return dbUsers.stream().map(AssociationMapper::mapToUserRespDTO)
                 .collect(Collectors.toList());
     }
 

@@ -1,12 +1,8 @@
 package com.petCommunity.PetCommunityBack.Controllers;
 
-import com.petCommunity.PetCommunityBack.DTOs.AssociationReqDTO;
-import com.petCommunity.PetCommunityBack.DTOs.AssociationRespDTO;
-import com.petCommunity.PetCommunityBack.DTOs.PetReqDTO;
-import com.petCommunity.PetCommunityBack.DTOs.PetRespDTO;
-import com.petCommunity.PetCommunityBack.Services.AssociationCrudServ;
+import com.petCommunity.PetCommunityBack.DTOs.UserReqDTO;
+import com.petCommunity.PetCommunityBack.DTOs.UserRespDTO;
 import com.petCommunity.PetCommunityBack.Services.IAssociationCrudServ;
-import com.petCommunity.PetCommunityBack.Services.PetCrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,16 +16,16 @@ public class AssociationController {
     private IAssociationCrudServ associationCrudServ;
 
     @GetMapping
-    public List<AssociationRespDTO> getAll(){return associationCrudServ.getAll();}
+    public List<UserRespDTO> getAll(){return associationCrudServ.getAll();}
 
     @GetMapping("/{id}")
-    public AssociationRespDTO getById(@PathVariable Long id){
+    public UserRespDTO getById(@PathVariable Long id){
         return associationCrudServ.getById(id);
     }
 
     @PostMapping
-    public AssociationRespDTO save(@RequestBody AssociationReqDTO associationReqDTO){
-        return associationCrudServ.save(associationReqDTO);
+    public UserRespDTO save(@RequestBody UserReqDTO userReqDTO){
+        return associationCrudServ.save(userReqDTO);
     }
 
     @DeleteMapping("/{id}")
@@ -38,8 +34,8 @@ public class AssociationController {
     }
 
     @PutMapping
-    public AssociationRespDTO updateByID(@RequestBody AssociationReqDTO associationReqDTO){
-        var updatedAssociation = associationCrudServ.update(associationReqDTO);
+    public UserRespDTO updateByID(@RequestBody UserReqDTO userReqDTO){
+        var updatedAssociation = associationCrudServ.update(userReqDTO);
 
         return updatedAssociation;
     }

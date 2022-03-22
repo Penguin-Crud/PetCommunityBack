@@ -1,6 +1,5 @@
 package com.petCommunity.PetCommunityBack.DTOs;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,5 +16,5 @@ public class PetReqDTO {
     public String specie;
     public Boolean vaccinated;
     public String description;
-    public AssociationReqDTO associationReqDTO;
+    public UserReqDTO userReqDTO;
 }

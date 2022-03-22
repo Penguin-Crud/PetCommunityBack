@@ -1,49 +1,49 @@
 package com.petCommunity.PetCommunityBack.Mappers;
 
-import com.petCommunity.PetCommunityBack.DTOs.AssociationReqDTO;
-import com.petCommunity.PetCommunityBack.DTOs.AssociationRespDTO;
+import com.petCommunity.PetCommunityBack.DTOs.UserReqDTO;
+import com.petCommunity.PetCommunityBack.DTOs.UserRespDTO;
 import com.petCommunity.PetCommunityBack.DomainModels.User;
 
 public class AssociationMapper {
-    public static AssociationRespDTO mapToAssociationRespDTO(User user){
-        AssociationRespDTO associationRespDTO = AssociationRespDTO.builder()
+    public static UserRespDTO mapToUserRespDTO(User user){
+        UserRespDTO userRespDTO = UserRespDTO.builder()
                 .id(user.getId())
                 .name(user.getUsername())
                 .logo(user.getLogo())
                 .adress(user.getAdress())
                 .capacity(user.getCapacity())
                 .build();
-        return associationRespDTO;
+        return userRespDTO;
     }
-    public static AssociationReqDTO mapToAssociationReqDTO(User user){
-        AssociationReqDTO associationReqDTO = AssociationReqDTO.builder()
+    public static UserReqDTO mapToUserReqDTO(User user){
+        UserReqDTO userReqDTO = UserReqDTO.builder()
                 .id(user.getId())
                 .name(user.getUsername())
                 .logo(user.getLogo())
                 .adress(user.getAdress())
                 .capacity(user.getCapacity())
                 .build();
-        return associationReqDTO;
+        return userReqDTO;
     }
 
-    public static User mapToAssociation(AssociationReqDTO associationReqDTO){
+    public static User mapToUser(UserReqDTO userReqDTO){
         User user = User.builder()
-                .id(associationReqDTO.getId())
-                .username(associationReqDTO.getName())
-                .logo(associationReqDTO.getLogo())
-                .adress(associationReqDTO.getAdress())
-                .capacity(associationReqDTO.getCapacity())
+                .id(userReqDTO.getId())
+                .username(userReqDTO.getName())
+                .logo(userReqDTO.getLogo())
+                .adress(userReqDTO.getAdress())
+                .capacity(userReqDTO.getCapacity())
                 .build();
         return user;
     }
 
-    public static User mapToAssociation(AssociationRespDTO associationRespDTO){
+    public static User mapToUser(UserRespDTO userRespDTO){
         User user = User.builder()
-                .id(associationRespDTO.getId())
-                .username(associationRespDTO.getName())
-                .logo(associationRespDTO.getLogo())
-                .adress(associationRespDTO.getAdress())
-                .capacity(associationRespDTO.getCapacity())
+                .id(userRespDTO.getId())
+                .username(userRespDTO.getName())
+                .logo(userRespDTO.getLogo())
+                .adress(userRespDTO.getAdress())
+                .capacity(userRespDTO.getCapacity())
                 .build();
         return user;
     }

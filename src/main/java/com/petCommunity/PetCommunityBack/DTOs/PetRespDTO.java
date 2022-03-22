@@ -17,7 +17,7 @@ public class PetRespDTO {
     public String specie;
     public Boolean vaccinated;
     public String description;
-    public AssociationRespDTO associationRespDTO;
+    public UserRespDTO userRespDTO;
     public List<PetImg> petImg;
 
 

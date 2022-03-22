@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
-import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.mapToAssociationReqDTO;
+import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.mapToUserReqDTO;
 
 @RestController
 @RequestMapping("/pets")
@@ -52,7 +52,7 @@ public class PetController {
     public PetRespDTO save(@RequestPart PetReqDTO pet,@RequestParam MultipartFile image) throws IOException {
         var user = authenticationFacade.getAuthUser();
         var cloudinaryImgUrl = cloudinaryImpl.saveInCloudinary(image);
-        pet.setAssociationReqDTO(mapToAssociationReqDTO(user));
+        pet.setUserReqDTO(mapToUserReqDTO(user));
 
 
         return petCrudService.save(pet, cloudinaryImgUrl);

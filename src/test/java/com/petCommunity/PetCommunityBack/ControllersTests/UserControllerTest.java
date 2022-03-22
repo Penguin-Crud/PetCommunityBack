@@ -5,9 +5,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import com.petCommunity.PetCommunityBack.Controllers.AssociationController;
-import com.petCommunity.PetCommunityBack.DTOs.AssociationReqDTO;
-import com.petCommunity.PetCommunityBack.DTOs.AssociationRespDTO;
-import com.petCommunity.PetCommunityBack.Services.AssociationCrudServ;
+import com.petCommunity.PetCommunityBack.DTOs.UserReqDTO;
+import com.petCommunity.PetCommunityBack.DTOs.UserRespDTO;
 import com.petCommunity.PetCommunityBack.Services.IAssociationCrudServ;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
@@ -37,15 +36,15 @@ public class UserControllerTest {
     @Autowired    ObjectMapper objectMapper;
     @MockBean     IAssociationCrudServ crudService;
 
-    private final List<AssociationRespDTO> associationsDTOList = new ArrayList<>();
-    private AssociationReqDTO associationReqDTO;
+    private final List<UserRespDTO> associationsDTOList = new ArrayList<>();
+    private UserReqDTO userReqDTO;
 
     @BeforeEach
     void init(){
         Faker faker = new Faker();
 
         for (Long i = 0L; i < 5 ; i++) {
-            associationsDTOList.add(AssociationRespDTO.builder()
+            associationsDTOList.add(UserRespDTO.builder()
                     .id(i)
                     .name(faker.funnyName().name())
                     .logo(faker.avatar().image())
@@ -55,7 +54,7 @@ public class UserControllerTest {
             );
         }
 
-        associationReqDTO = AssociationReqDTO.builder()
+        userReqDTO = UserReqDTO.builder()
                 .name(faker.funnyName().name())
                 .password(faker.random().hex(8))
                 .logo(faker.avatar().image())
@@ -80,7 +79,7 @@ public class UserControllerTest {
 
         var expected = associationsDTOList;
 
-        assertThat(objectMapper.readValue(sut, new TypeReference<List<AssociationRespDTO>>() {}))
+        assertThat(objectMapper.readValue(sut, new TypeReference<List<UserRespDTO>>() {}))
                 .usingRecursiveComparison().isEqualTo(expected);
     }
 
@@ -102,13 +101,13 @@ public class UserControllerTest {
 
     @Test
     public void whenCreatingANewAssociationGetObjectCreated() throws Exception {
-        var expected = mapToAssociationRespDTO(mapToAssociation(associationReqDTO));
+        var expected = mapToUserRespDTO(mapToUser(userReqDTO));
 
-        when(crudService.save(ArgumentMatchers.any(AssociationReqDTO.class))).thenReturn(expected);
+        when(crudService.save(ArgumentMatchers.any(UserReqDTO.class))).thenReturn(expected);
 
         var sut = mockMvc.perform(post("/associations")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(toJson(associationReqDTO))
+                        .content(toJson(userReqDTO))
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
@@ -121,13 +120,13 @@ public class UserControllerTest {
 
     @Test
     public void  whenUpdatingAnAssociationReturnPetUpdated() throws Exception {
-        var expected = mapToAssociationRespDTO(mapToAssociation(associationReqDTO));
+        var expected = mapToUserRespDTO(mapToUser(userReqDTO));
 
-        when(crudService.save(ArgumentMatchers.any(AssociationReqDTO.class))).thenReturn(expected);
+        when(crudService.save(ArgumentMatchers.any(UserReqDTO.class))).thenReturn(expected);
 
         var sut = mockMvc.perform(post("/associations")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(toJson(associationReqDTO))
+                        .content(toJson(userReqDTO))
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
