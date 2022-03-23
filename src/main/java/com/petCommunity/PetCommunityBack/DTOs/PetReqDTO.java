@@ -9,12 +9,12 @@ import lombok.Setter;
 public class PetReqDTO {
     public Long id;
     public String name;
-    public Boolean hasChip;
+    public Boolean chip;
     public String race;
     public String size;
     public String age;
     public String specie;
-    public Boolean vaccinated;
+    public Boolean vaccines;
     public String description;
     public UserReqDTO userReqDTO;
 }

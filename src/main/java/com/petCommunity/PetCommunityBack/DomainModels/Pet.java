@@ -12,12 +12,12 @@ public class Pet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Boolean hasChip;
+    private Boolean chip;
     private String race;
     private String size;
     private String age;
     private String specie;
-    private Boolean vaccinated;
+    private Boolean vaccines;
     private String description;
 
     @ManyToOne

@@ -21,7 +21,6 @@ import java.util.List;
 
 import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.mapToUserReqDTO;
 import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.mapToUserRespDTO;
-import static com.petCommunity.PetCommunityBack.Mappers.PetMapper.mapToPet;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -66,12 +65,12 @@ class PetControllerTest {
         for (Long i = 0L; i < 10; i++) {
             pets.add(PetRespDTO.builder()
                     .id(i)
-                    .hasChip(true)
+                    .chip(true)
                     .race(faker.lorem().characters(8,14))
                     .size(faker.dog().size())
                     .age(faker.dog().size())
                     .specie("canino")
-                    .vaccinated(faker.random().nextBoolean())
+                    .vaccines(faker.random().nextBoolean())
                     .description(faker.dog().memePhrase())
                     .userRespDTO(mapToUserRespDTO(user))
                     .petImg(petImgs.subList(0,3))
@@ -80,12 +79,12 @@ class PetControllerTest {
 
         petReqDTO = PetReqDTO.builder()
                 .id(1L)
-                .hasChip(true)
+                .chip(true)
                 .race(faker.lorem().characters(8,14))
                 .size(faker.dog().size())
                 .age(faker.dog().age())
                 .specie("canino")
-                .vaccinated(faker.random().nextBoolean())
+                .vaccines(faker.random().nextBoolean())
                 .description(faker.dog().memePhrase())
                 .userReqDTO(mapToUserReqDTO(user))
                 .build();
