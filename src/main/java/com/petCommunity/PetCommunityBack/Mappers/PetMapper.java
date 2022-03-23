@@ -9,8 +9,8 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.mapToUser;
-import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.mapToUserRespDTO;
+import static com.petCommunity.PetCommunityBack.Mappers.UserMapper.mapToUser;
+import static com.petCommunity.PetCommunityBack.Mappers.UserMapper.mapToUserRespDTO;
 
 
 @Component

@@ -1,6 +1,6 @@
 package com.petCommunity.PetCommunityBack.configuration;
 
-import com.petCommunity.PetCommunityBack.Services.ImgsStorageService;
+import com.petCommunity.PetCommunityBack.Services.CloudinaryCloudStorageServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
 
     @Bean
-    public ImgsStorageService cloudinaryImpl(){
-        return new ImgsStorageService();
+    public CloudinaryCloudStorageServiceImpl cloudinaryImpl(){
+        return new CloudinaryCloudStorageServiceImpl();
     }
 
 }

@@ -5,9 +5,8 @@ import com.petCommunity.PetCommunityBack.DTOs.UserRespDTO;
 
 import java.util.List;
 
-public interface IAssociationCrudServ {
+public interface IUserCrudServ {
 
-    UserRespDTO save(UserReqDTO userReqDTO);
     UserRespDTO getById(Long id);
     UserRespDTO update(UserReqDTO userReqDTO);
     List<UserRespDTO> getAll();

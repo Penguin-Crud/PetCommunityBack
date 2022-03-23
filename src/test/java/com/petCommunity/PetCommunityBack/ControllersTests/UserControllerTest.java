@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
-import com.petCommunity.PetCommunityBack.Controllers.AssociationController;
+import com.petCommunity.PetCommunityBack.Controllers.UserController;
 import com.petCommunity.PetCommunityBack.DTOs.UserReqDTO;
 import com.petCommunity.PetCommunityBack.DTOs.UserRespDTO;
-import com.petCommunity.PetCommunityBack.Services.IAssociationCrudServ;
+import com.petCommunity.PetCommunityBack.Services.IUserCrudServ;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 import org.mockito.ArgumentMatchers;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.*;
+import static com.petCommunity.PetCommunityBack.Mappers.UserMapper.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
 import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
@@ -30,11 +30,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
-@WebMvcTest(AssociationController.class)
+@WebMvcTest(UserController.class)
 public class UserControllerTest {
     @Autowired    MockMvc mockMvc;
     @Autowired    ObjectMapper objectMapper;
-    @MockBean     IAssociationCrudServ crudService;
+    @MockBean
+    IUserCrudServ crudService;
 
     private final List<UserRespDTO> associationsDTOList = new ArrayList<>();
     private UserReqDTO userReqDTO;
@@ -56,7 +57,6 @@ public class UserControllerTest {
 
         userReqDTO = UserReqDTO.builder()
                 .username(faker.funnyName().name())
-                .password(faker.random().hex(8))
                 .logo(faker.avatar().image())
                 .adress(faker.address().cityName())
                 .capacity(faker.number().numberBetween(30, 50))
@@ -103,7 +103,7 @@ public class UserControllerTest {
     public void whenCreatingANewAssociationGetObjectCreated() throws Exception {
         var expected = mapToUserRespDTO(mapToUser(userReqDTO));
 
-        when(crudService.save(ArgumentMatchers.any(UserReqDTO.class))).thenReturn(expected);
+        when(crudService.update(ArgumentMatchers.any(UserReqDTO.class))).thenReturn(expected);
 
         var sut = mockMvc.perform(post("/associations")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -122,7 +122,7 @@ public class UserControllerTest {
     public void  whenUpdatingAnAssociationReturnPetUpdated() throws Exception {
         var expected = mapToUserRespDTO(mapToUser(userReqDTO));
 
-        when(crudService.save(ArgumentMatchers.any(UserReqDTO.class))).thenReturn(expected);
+        when(crudService.update(ArgumentMatchers.any(UserReqDTO.class))).thenReturn(expected);
 
         var sut = mockMvc.perform(post("/associations")
                         .contentType(MediaType.APPLICATION_JSON)

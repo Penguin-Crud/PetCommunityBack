@@ -4,7 +4,7 @@ package com.petCommunity.PetCommunityBack.Controllers;
 import com.petCommunity.PetCommunityBack.DTOs.PetReqDTO;
 import com.petCommunity.PetCommunityBack.DTOs.PetRespDTO;
 import com.petCommunity.PetCommunityBack.Services.IPetCrudService;
-import com.petCommunity.PetCommunityBack.Services.ImgsStorageService;
+import com.petCommunity.PetCommunityBack.Services.CloudinaryCloudStorageServiceImpl;
 import com.petCommunity.PetCommunityBack.Services.PetImgCrudService;
 import com.petCommunity.PetCommunityBack.auth.facade.IAuthenticationFacade;
 import lombok.Setter;
@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
-import static com.petCommunity.PetCommunityBack.Mappers.AssociationMapper.mapToUserReqDTO;
+import static com.petCommunity.PetCommunityBack.Mappers.UserMapper.mapToUserReqDTO;
 
 @RestController
 @RequestMapping("/pets")
@@ -26,11 +26,11 @@ public class PetController {
 
     private final IPetCrudService petCrudService;
     private final PetImgCrudService petImgCrudService;
-    private final ImgsStorageService cloudinaryImpl;
+    private final CloudinaryCloudStorageServiceImpl cloudinaryImpl;
     private final IAuthenticationFacade authenticationFacade;
 
     @Autowired
-    public PetController(IPetCrudService petCrudService, PetImgCrudService petImgCrudService, ImgsStorageService cloudinaryImpl, IAuthenticationFacade authenticationFacade) {
+    public PetController(IPetCrudService petCrudService, PetImgCrudService petImgCrudService, CloudinaryCloudStorageServiceImpl cloudinaryImpl, IAuthenticationFacade authenticationFacade) {
         this.petCrudService = petCrudService;
         this.petImgCrudService = petImgCrudService;
         this.cloudinaryImpl = cloudinaryImpl;
@@ -51,7 +51,7 @@ public class PetController {
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE} )
     public PetRespDTO save(@RequestPart PetReqDTO pet,@RequestParam MultipartFile image) throws IOException {
         var user = authenticationFacade.getAuthUser();
-        var cloudinaryImgUrl = cloudinaryImpl.saveInCloudinary(image);
+        var cloudinaryImgUrl = cloudinaryImpl.saveInCloud(image);
         pet.setUserReqDTO(mapToUserReqDTO(user));
 
 

@@ -4,7 +4,7 @@ import com.petCommunity.PetCommunityBack.DTOs.UserReqDTO;
 import com.petCommunity.PetCommunityBack.DTOs.UserRespDTO;
 import com.petCommunity.PetCommunityBack.DomainModels.User;
 
-public class AssociationMapper {
+public class UserMapper {
     public static UserRespDTO mapToUserRespDTO(User user){
         UserRespDTO userRespDTO = UserRespDTO.builder()
                 .id(user.getId())

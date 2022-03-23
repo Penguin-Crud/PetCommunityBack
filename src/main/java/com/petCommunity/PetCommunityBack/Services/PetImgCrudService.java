@@ -1,6 +1,6 @@
 package com.petCommunity.PetCommunityBack.Services;
 
-import com.petCommunity.PetCommunityBack.DTOs.PetRespDTO;
+
 import com.petCommunity.PetCommunityBack.DomainModels.Pet;
 import com.petCommunity.PetCommunityBack.DomainModels.PetImg;
 import com.petCommunity.PetCommunityBack.Repositorys.PetImgRepo;
@@ -9,15 +9,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.petCommunity.PetCommunityBack.Mappers.PetMapper.mapToPet;
+
 
 @Service
-public class PetImgCrudService {
+public class PetImgCrudService implements IPetImgCrudService{
     @Autowired PetImgRepo petImgRepo;
 
-    public List<PetImg> save(Pet pet,String cloudinaryImgUrl){
+    public List<PetImg> save(Pet pet,String cloudImgUrl){
         PetImg petImgToSave = PetImg.builder()
-                .url(cloudinaryImgUrl)
+                .url(cloudImgUrl)
                 .pet(pet)
                 .build();
 
