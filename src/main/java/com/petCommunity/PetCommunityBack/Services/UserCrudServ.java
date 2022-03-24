@@ -37,7 +37,11 @@ public class UserCrudServ implements IUserCrudServ {
         var userToUpdate = userRepository.findById(authenticatedUserId).get();
 
         if(userDataRequest.getUsername() != userToUpdate.getUsername()){userToUpdate.setUsername(userDataRequest.getUsername());}
-        if(userDataRequest.getLogo() != userToUpdate.getLogo()){userToUpdate.setLogo(userDataRequest.getLogo());}
+        if(userDataRequest.getLogo() != null) {
+            if (userDataRequest.getLogo() != userToUpdate.getLogo()) {
+                userToUpdate.setLogo(userDataRequest.getLogo());
+            }
+        }
         if(userDataRequest.getAdress() != userToUpdate.getAdress()){userToUpdate.setAdress(userDataRequest.getAdress());}
         if(userDataRequest.getCapacity() != userToUpdate.getCapacity()){userToUpdate.setCapacity(userDataRequest.getCapacity());}
 

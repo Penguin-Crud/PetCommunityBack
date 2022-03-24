@@ -9,6 +9,7 @@ import com.petCommunity.PetCommunityBack.Services.IUserCrudServ;
 import com.petCommunity.PetCommunityBack.auth.facade.IAuthenticationFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.lang.Nullable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,11 +45,14 @@ public class UserController {
 
     @PreAuthorize("hasRole('USER')")
     @PutMapping (consumes = {MediaType.MULTIPART_FORM_DATA_VALUE} )
-    public UserRespDTO update(@RequestPart UserReqDTO user, @RequestParam MultipartFile image) throws IOException {
+    public UserRespDTO update(@RequestPart UserReqDTO user, @Nullable @RequestParam MultipartFile image) throws IOException {
         var userToSave = user;
 
-        var cloudinaryImgUrl = image != null ?cloudinaryImpl.saveInCloud(image):null;
-        userToSave.logo = cloudinaryImgUrl;
+
+        if(image != null) {
+            var cloudinaryImgUrl = cloudinaryImpl.saveInCloud(image);
+            userToSave.logo = cloudinaryImgUrl;
+        }
 
         return userCrudServ.update(userToSave);
     }
