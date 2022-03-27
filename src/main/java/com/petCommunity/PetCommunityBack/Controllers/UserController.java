@@ -30,7 +30,7 @@ public class UserController {
     private final CloudinaryCloudStorageServiceImpl cloudinaryImpl;
 
     @Autowired
-    public UserController(IUserCrudServ userCrudServ, IAuthenticationFacade authenticationFacade, CloudinaryCloudStorageServiceImpl cloudinaryImpl){
+    public UserController(IUserCrudServ userCrudServ, CloudinaryCloudStorageServiceImpl cloudinaryImpl){
         this.userCrudServ = userCrudServ;
         this.cloudinaryImpl = cloudinaryImpl;
     }
@@ -38,6 +38,7 @@ public class UserController {
     @GetMapping
     public List<UserRespDTO> getAll(){return userCrudServ.getAll();}
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/{id}")
     public UserRespDTO getById(@PathVariable Long id){
         return userCrudServ.getById(id);

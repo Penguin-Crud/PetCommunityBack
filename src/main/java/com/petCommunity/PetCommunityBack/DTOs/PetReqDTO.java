@@ -1,5 +1,6 @@
 package com.petCommunity.PetCommunityBack.DTOs;
 
+import com.petCommunity.PetCommunityBack.DomainModels.Pet;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,9 +12,11 @@ public class PetReqDTO {
     public String name;
     public Boolean chip;
     public String race;
-    public String size;
+    public Pet.Sizes size;
     public String age;
-    public String specie;
+    public Pet.Gender gender;
+    public Pet.Priority priority;
+    public Pet.Specie specie;
     public Boolean vaccines;
     public String description;
     public UserReqDTO userReqDTO;

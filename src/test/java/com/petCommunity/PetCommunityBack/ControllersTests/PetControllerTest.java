@@ -7,6 +7,7 @@ import com.github.javafaker.Faker;
 import com.petCommunity.PetCommunityBack.Controllers.PetController;
 import com.petCommunity.PetCommunityBack.DTOs.PetReqDTO;
 import com.petCommunity.PetCommunityBack.DTOs.PetRespDTO;
+import com.petCommunity.PetCommunityBack.DomainModels.Pet;
 import com.petCommunity.PetCommunityBack.DomainModels.User;
 import com.petCommunity.PetCommunityBack.DomainModels.PetImg;
 import com.petCommunity.PetCommunityBack.Services.IPetCrudService;
@@ -67,9 +68,11 @@ class PetControllerTest {
                     .id(i)
                     .chip(true)
                     .race(faker.lorem().characters(8,14))
-                    .size(faker.dog().size())
+                    .size(Pet.Sizes.MEDIUM)
                     .age(faker.dog().size())
-                    .specie("canino")
+                    .specie(Pet.Specie.CAT)
+                    .gender(Pet.Gender.MALE)
+                    .priority(Pet.Priority.HIGH)
                     .vaccines(faker.random().nextBoolean())
                     .description(faker.dog().memePhrase())
                     .userRespDTO(mapToUserRespDTO(user))
@@ -79,11 +82,14 @@ class PetControllerTest {
 
         petReqDTO = PetReqDTO.builder()
                 .id(1L)
+                .name("firulais")
                 .chip(true)
                 .race(faker.lorem().characters(8,14))
-                .size(faker.dog().size())
+                .size(Pet.Sizes.MEDIUM)
                 .age(faker.dog().age())
-                .specie("canino")
+                .gender(Pet.Gender.FEMALE)
+                .priority(Pet.Priority.LOW)
+                .specie(Pet.Specie.CAT)
                 .vaccines(faker.random().nextBoolean())
                 .description(faker.dog().memePhrase())
                 .userReqDTO(mapToUserReqDTO(user))
