@@ -3,7 +3,6 @@ package com.petCommunity.PetCommunityBack.DomainModels;
 
 import lombok.*;
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -11,24 +10,24 @@ import java.util.Date;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class Pet {
     public enum Sizes {
-        SMALL,
-        MEDIUM,
-        LARGE
+        small,
+        medium,
+        large
     }
     public enum Gender {
-        MALE,
-        FEMALE
+        male,
+        female
     }
     public enum Priority{
-        LOW,
-        MEDIUM,
-        HIGH
+        low,
+        medium,
+        high
     }
 
     public enum Specie{
-        DOG,
-        CAT,
-        OTHER
+        dog,
+        cat,
+        other
     }
 
 
@@ -58,7 +57,7 @@ public class Pet {
     private Date created_at;
 
 
-
+    @PrePersist
     private void onCreate(){
         created_at = new Date(System.currentTimeMillis());
     }
