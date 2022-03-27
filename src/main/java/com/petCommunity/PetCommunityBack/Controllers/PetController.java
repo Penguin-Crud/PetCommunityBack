@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.lang.Nullable;
 
 import java.io.IOException;
 import java.util.List;
@@ -58,13 +59,31 @@ public class PetController {
         return petCrudService.save(pet, cloudinaryImgUrl);
     }
 
-    @PreAuthorize("hasRole('USER')")
-    @DeleteMapping("/{id}")
-    public String deleteById(@PathVariable Long id) {
-        var petToDelete = petCrudService.getPetById(id);
-        petImgCrudService.deleteAllImgsByPet(petToDelete);
-        return petCrudService.deleteId(id);
-    }
+//    @PreAuthorize("hasRole('USER')")
+//    @DeleteMapping("/{id}")
+//    public String deleteById(@PathVariable Long id) {
+//        var petToDelete = petCrudService.getPetById(id);
+//        petImgCrudService.deleteAllImgsByPet(petToDelete);
+//        return petCrudService.deleteId(id);
+//    }
+//
+//    @PreAuthorize("hasRole('USER')")
+//    @PutMapping (consumes = {MediaType.MULTIPART_FORM_DATA_VALUE} )
+//    public PetRespDTO update(@RequestPart PetReqDTO pet, @Nullable @RequestParam MultipartFile image) throws IOException {
+//        var user = authenticationFacade.getAuthUser();
+//        var updatedAnimal = pet;
+////        pet.setUserReqDTO(mapToUserReqDTO(user));
+//
+//
+//        if(image != null) {
+//            var cloudinaryImgUrl = cloudinaryImpl.saveInCloud(image);
+//            updatedAnimal.logo = cloudinaryImgUrl;
+////            petImgCrudService.save(pet, cloudinaryImgUrl );
+//
+//        }
+//
+//        return petCrudService.update(updatedAnimal);
+//    }
 
     @PreAuthorize("hasRole('USER')")
     @PutMapping
@@ -73,5 +92,15 @@ public class PetController {
 
         return updatedAnimal;
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+

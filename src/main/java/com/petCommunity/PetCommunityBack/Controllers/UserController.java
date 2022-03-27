@@ -57,6 +57,10 @@ public class UserController {
 
         return userCrudServ.update(userToSave);
     }
+
+
+
+
     @DeleteMapping("/{id}")
     public String deleteById(@PathVariable Long id) {
         return userCrudServ.deleteId(id);
@@ -68,5 +72,4 @@ public class UserController {
 
         return updatedUser;
     }
-
 }

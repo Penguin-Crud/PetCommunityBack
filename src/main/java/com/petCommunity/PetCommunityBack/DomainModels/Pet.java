@@ -61,7 +61,4 @@ public class Pet {
     private void onCreate(){
         created_at = new Date(System.currentTimeMillis());
     }
-
-
-
 }
