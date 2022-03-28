@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
-public class Pet {
+public class    Pet {
     public enum Sizes {
         small,
         medium,
@@ -53,7 +53,7 @@ public class Pet {
     @JoinColumn(name = "user_id")
     private User user;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
+    @Column(nullable = false , updatable = false)
     private Date created_at;
 
 

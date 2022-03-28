@@ -18,6 +18,7 @@ import org.springframework.lang.Nullable;
 import java.io.IOException;
 import java.util.List;
 
+import static com.petCommunity.PetCommunityBack.Mappers.PetMapper.mapToPet;
 import static com.petCommunity.PetCommunityBack.Mappers.UserMapper.mapToUserReqDTO;
 
 @RestController
@@ -59,31 +60,30 @@ public class PetController {
         return petCrudService.save(pet, cloudinaryImgUrl);
     }
 
-//    @PreAuthorize("hasRole('USER')")
-//    @DeleteMapping("/{id}")
-//    public String deleteById(@PathVariable Long id) {
-//        var petToDelete = petCrudService.getPetById(id);
-//        petImgCrudService.deleteAllImgsByPet(petToDelete);
-//        return petCrudService.deleteId(id);
-//    }
+    @PreAuthorize("hasRole('USER')")
+    @DeleteMapping("/{id}")
+    public String deleteById(@PathVariable Long id) {
+        var petToDelete = petCrudService.getPetById(id);
+        petImgCrudService.deleteAllImgsByPet(petToDelete);
+        return petCrudService.deleteId(id);
+    }
 //
-//    @PreAuthorize("hasRole('USER')")
-//    @PutMapping (consumes = {MediaType.MULTIPART_FORM_DATA_VALUE} )
-//    public PetRespDTO update(@RequestPart PetReqDTO pet, @Nullable @RequestParam MultipartFile image) throws IOException {
-//        var user = authenticationFacade.getAuthUser();
-//        var updatedAnimal = pet;
-////        pet.setUserReqDTO(mapToUserReqDTO(user));
-//
-//
-//        if(image != null) {
-//            var cloudinaryImgUrl = cloudinaryImpl.saveInCloud(image);
-//            updatedAnimal.logo = cloudinaryImgUrl;
-////            petImgCrudService.save(pet, cloudinaryImgUrl );
-//
-//        }
-//
-//        return petCrudService.update(updatedAnimal);
-//    }
+    @PreAuthorize("hasRole('USER')")
+    @PutMapping (consumes = {MediaType.MULTIPART_FORM_DATA_VALUE} )
+    public PetRespDTO update(@RequestPart PetReqDTO pet, @Nullable @RequestParam MultipartFile image) throws IOException {
+        var user = authenticationFacade.getAuthUser();
+        var updatedPet = pet;
+        pet.setUserReqDTO(mapToUserReqDTO(user));
+
+
+        if(image != null) {
+           var petToUpdateImg = petCrudService.getPetById(updatedPet.id);
+            var cloudinaryImgUrl = cloudinaryImpl.saveInCloud(image);
+            petImgCrudService.updatePetImg(petToUpdateImg,cloudinaryImgUrl);
+        }
+
+        return petCrudService.update(updatedPet);
+    }
 
     @PreAuthorize("hasRole('USER')")
     @PutMapping

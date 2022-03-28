@@ -5,6 +5,7 @@ import com.petCommunity.PetCommunityBack.DomainModels.PetImg;
 import lombok.*;
 
 import javax.validation.constraints.Size;
+import java.util.Date;
 import java.util.List;
 
 
@@ -22,5 +23,6 @@ public class PetRespDTO {
     public Boolean vaccines;
     public String description;
     public UserRespDTO userRespDTO;
+    public Date crated_at;
     public List<PetImg> petImg;
 }

@@ -43,6 +43,7 @@ public class PetMapper {
                 .vaccines(pet.getVaccines())
                 .description(pet.getDescription())
                 .userRespDTO(mapToUserRespDTO(pet.getUser()))
+                .crated_at(pet.getCreated_at())
                 .petImg(petImgCrudService.findAllByPet(pet))
                 .build();
         return petRespDTO;

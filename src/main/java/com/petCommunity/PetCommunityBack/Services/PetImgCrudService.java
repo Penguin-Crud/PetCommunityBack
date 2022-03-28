@@ -30,6 +30,14 @@ public class PetImgCrudService implements IPetImgCrudService{
         return petImgRepo.findAllByPet(pet);
     }
 
+    public List<PetImg> updatePetImg(Pet pet, String cloudImgUrl){
+
+        deleteAllImgsByPet(pet);
+
+        var updatedImg = save(pet,cloudImgUrl);
+        return updatedImg;
+    }
+
     public String deleteAllImgsByPet(Pet pet){
         var imgsToDelete = findAllByPet(pet);
         petImgRepo.deleteAll(imgsToDelete);
